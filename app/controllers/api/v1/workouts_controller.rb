@@ -1,14 +1,15 @@
 class Api::V1::WorkoutsController < ApplicationController
     # before_action :authenticate_user!
     def index
-        @workouts = Workout.all
-        render json: @workouts.to_json(include: [:category])
+        workouts = Workout.all
+        # render json: workouts
+        render json: WorkoutSerializer.new(workouts)
+        # render json: @workouts.to_json(include: [:category])
         # render json: @workouts, status: 200
     end
 
     def show
         @workout = Workout.find(params[:id])
-
         render json: @workout, status: 200
     end 
 
@@ -33,6 +34,6 @@ class Api::V1::WorkoutsController < ApplicationController
     private
 
     def workout_params
-        params.require(:workout).permit(:name, :url, :time, :category)
+        params.require(:workout).permit(:name, :url, :time, :category_id)
     end 
 end

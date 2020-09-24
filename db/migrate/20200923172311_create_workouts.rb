@@ -4,7 +4,7 @@ class CreateWorkouts < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :url
       t.time :time
-      t.belongs_to :category
+      # t.belongs_to :category
       # t.timestamps
     end
   end

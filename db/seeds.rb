@@ -19,12 +19,12 @@ u1 = User.create(name: "a")
 u2 = User.create(name: "b")
 u3 = User.create(name: "c")
 
-w1 = Workout.create(name: "Pilates", url:"https://www.youtube.com/watch?v=H2U3HwAyBXg", time: "2020-09-18 15:43:11", category_id: 2)
-w2 = Workout.create(name: "Arms", url:"https://www.youtube.com/watch?v=JkVHrA5o23o", time: "2020-09-18 16:11:51", category_id: 1)
-w3 = Workout.create(name: "Legs", url:"https://www.youtube.com/watch?v=1vRto-2MMZo", time: "2020-09-18 17:22:45", category_id: 1)
-w4 = Workout.create(name: "Squats", url:"https://www.youtube.com/watch?v=2pLT-olgUJs&t=63s", time: "2020-09-18 18:45:30", category_id: 3)
-w5 = Workout.create(name: "Back", url:"https://www.youtube.com/watch?v=_Zem0_qsDg0&t=1419s", time: "2020-09-18 19:23:15", category_id: 3)
-w6 = Workout.create(name: "Thighs", url:"https://www.youtube.com/watch?v=hI-JSz2Iv-k", time: "2020-09-18 20:14:04", category_id: 3)
+w1 = Workout.create(name: "Pilates", url:"https://www.youtube.com/embed/H2U3HwAyBXg", time: "2020-09-18 15:43:11", category_id: 2)
+w2 = Workout.create(name: "Arms", url:"https://www.youtube.com/embed/JkVHrA5o23o", time: "2020-09-18 16:11:51", category_id: 1)
+w3 = Workout.create(name: "Legs", url:"https://www.youtube.com/embed/1vRto-2MMZo", time: "2020-09-18 17:22:45", category_id: 1)
+w4 = Workout.create(name: "Squats", url:"https://www.youtube.com/embed/2pLT-olgUJs&t=63s", time: "2020-09-18 18:45:30", category_id: 3)
+w5 = Workout.create(name: "Back", url:"https://www.youtube.com/embed/_Zem0_qsDg0&t=1419s", time: "2020-09-18 19:23:15", category_id: 3)
+w6 = Workout.create(name: "Thighs", url:"https://www.youtube.com/embed/hI-JSz2Iv-k", time: "2020-09-18 20:14:04", category_id: 3)
 
 
 uw1 = UserWorkout.create(user_id: 1, workout_id: 1, date: "2020-09-18")

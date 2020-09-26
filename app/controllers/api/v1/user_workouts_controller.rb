@@ -3,12 +3,12 @@ class Api::V1::UserWorkoutsController < ApplicationController
 
     def index
         user_workouts = UserWorkout.all
-        render json: UserWorkoutsSerializer.new(user_workouts)
+        render json: UserWorkoutsSerializer.new(user_workouts).to_serialized_json
     end
 
     def show
         #user_workout = UserWorkout.find_by_id(params[:id])
-        render json: UserWorkoutsSerializer.new(user_workout)
+        render json: UserWorkoutsSerializer.new(@user_workout).to_serialized_json
     end
 
     def update
@@ -43,7 +43,7 @@ class Api::V1::UserWorkoutsController < ApplicationController
     end
 
     def find_user_workout
-        user_workout = UserWorkout.find_by_id(params[:id])    
+        @user_workout = UserWorkout.find_by_id(params[:id])    
     end
 
 

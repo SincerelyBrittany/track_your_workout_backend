@@ -7,7 +7,7 @@ class UserWorkout < ApplicationRecord
     end
 
     def create_find_by_name(user_params)
-        User.where(name: user_params).first_or_create do |user|
+        User.where(username: user_params).first_or_create do |user|
             user.name = user_params.name
         end
     end 

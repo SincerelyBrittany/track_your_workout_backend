@@ -21,7 +21,7 @@ class UserWorkoutsSerializer
   #  @user_workout.to_json(:only => [:created_at, :updated_at], methods: :update_date), 
     :include => {
         :workout => {:only => [:name, :url], methods: :time_updated},
-        :user => {:only => [:name]} 
+        :user => {:only => [:username]} 
     })
   end 
 

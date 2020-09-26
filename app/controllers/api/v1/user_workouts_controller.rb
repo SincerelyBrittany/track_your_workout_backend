@@ -21,10 +21,10 @@ class Api::V1::UserWorkoutsController < ApplicationController
         end
     end
     def create
-        byebug
-        user = User.create_or_find_by!(username: user_params)
-        workout = Workout.new(workout_params)
-        user_workout = UserWorkout.new(date: user_workout_params, workout: workout, user: user)
+        # user = User.find_by(username: "b")
+        user = User.find_by(username: "b")
+        workout = Workout.create(workout_params)
+        user_workout = UserWorkout.new(date: user_workout_params["date"], workout: workout, user: user)
         if user_workout.save
             render json: UserWorkoutsSerializer.new(user_workout), status: :accepted
         else

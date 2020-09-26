@@ -15,9 +15,9 @@ UserWorkout.destroy_all
 # c2 = Category.create(name: "legs")
 # c2 = Category.create(name: "abs")
 
-u1 = User.create(name: "a")
-u2 = User.create(name: "b")
-u3 = User.create(name: "c")
+u1 = User.create(username: "a")
+u2 = User.create(username: "b")
+u3 = User.create(username: "c")
 
 w1 = Workout.create(name: "Pilates", url:"https://www.youtube.com/embed/H2U3HwAyBXg", time: "2020-09-18 15:43:11")
 w2 = Workout.create(name: "Arms", url:"https://www.youtube.com/embed/JkVHrA5o23o", time: "2020-09-18 16:11:51")

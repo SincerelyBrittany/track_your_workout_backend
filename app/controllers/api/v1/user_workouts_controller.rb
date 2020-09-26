@@ -2,7 +2,7 @@ class Api::V1::UserWorkoutsController < ApplicationController
     before_action :find_user_workout, only: [:show, :update, :destroy]
 
     def index
-        user_workouts = UserWorkout.all
+        user_workouts = UserWorkout.order(:date)
         render json: UserWorkoutsSerializer.new(user_workouts).to_serialized_json
     end
 
@@ -21,7 +21,10 @@ class Api::V1::UserWorkoutsController < ApplicationController
         end
     end
     def create
-        user_workout = UserWorkout.new(user_workout_params)
+        byebug
+        user = User.create_or_find_by!(username: user_params)
+        workout = Workout.new(workout_params)
+        user_workout = UserWorkout.new(date: user_workout_params, workout: workout, user: user)
         if user_workout.save
             render json: UserWorkoutsSerializer.new(user_workout), status: :accepted
         else
@@ -38,8 +41,16 @@ class Api::V1::UserWorkoutsController < ApplicationController
 
     private
     
+    def workout_params
+        params.require(:user_workout).permit(:name, :url, :time)
+    end
+
+    def user_params
+        params.require(:user_workout).permit(:username)
+    end
+
     def user_workout_params
-        params.require(:user_workout).permit(:name)
+        params.require(:user_workout).permit(:date)
     end
 
     def find_user_workout

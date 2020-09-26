@@ -18,13 +18,14 @@ class UserWorkoutsSerializer
 
   def to_serialized_json
     @user_workout.to_json(:except => [:created_at, :updated_at], 
+  #  @user_workout.to_json(:only => [:created_at, :updated_at], methods: :update_date), 
     :include => {
-        :workout => {:only => [:name, :url, :time]}, 
+        :workout => {:only => [:name, :url], methods: :time_updated},
         :user => {:only => [:name]} 
     })
   end 
 
-  def update_time
-    time.strftime("%I:%M:%S %p")
-  end
+  # def update_time
+  #   time.strftime("%I:%M:%S %p")
+  # end
 end

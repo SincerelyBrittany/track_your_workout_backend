@@ -21,12 +21,11 @@ class Api::V1::UserWorkoutsController < ApplicationController
     #     end
     # end
     def create
-        # user = User.find_by(username: "b")
         user = User.find_by(username: "b")
         workout = Workout.create(workout_params)
         user_workout = UserWorkout.new(date: user_workout_params["date"], workout: workout, user: user)
         if user_workout.save
-            render json: UserWorkoutsSerializer.new(user_workout), status: :accepted
+            render json: UserWorkoutsSerializer.new(user_workout).to_serialized_json
         else
             render json: { errors: user_workout.errors.full_messages }, status: :unprocessable_entity
         end

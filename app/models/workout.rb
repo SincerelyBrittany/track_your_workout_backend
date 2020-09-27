@@ -3,6 +3,10 @@ class Workout < ApplicationRecord
     has_many :user_workouts, dependent: :destroy
     has_many :users, through: :user_workouts
 
+    validates :url, uniqueness: true, presence: true
+    validates :time, uniqueness: true, presence: true
+    validates :name, uniqueness: true, presence: true
+
     def time_updated
        self.time.strftime("%I:%M:%S %p")
     end

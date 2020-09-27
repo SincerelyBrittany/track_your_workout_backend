@@ -6,20 +6,20 @@ class Api::V1::UserWorkoutsController < ApplicationController
         render json: UserWorkoutsSerializer.new(user_workouts).to_serialized_json
     end
 
-    def show
-        #user_workout = UserWorkout.find_by_id(params[:id])
-        render json: UserWorkoutsSerializer.new(@user_workout).to_serialized_json
-    end
+    # def show
+    #     #user_workout = UserWorkout.find_by_id(params[:id])
+    #     render json: UserWorkoutsSerializer.new(@user_workout).to_serialized_json
+    # end
 
-    def update
-        #user_workout = UserWorkout.find_by_id(params[:id])
-        user_workout.update(user_workout_params)
-        if user_workout.save
-            render json: UserWorkoutsSerializer.new(user_workout), status: :accepted
-        else
-          render json: { errors: user_workout.errors.full_messages }, status: :unprocessable_entity
-        end
-    end
+    # def update
+    #     #user_workout = UserWorkout.find_by_id(params[:id])
+    #     user_workout.update(user_workout_params)
+    #     if user_workout.save
+    #         render json: UserWorkoutsSerializer.new(user_workout), status: :accepted
+    #     else
+    #       render json: { errors: user_workout.errors.full_messages }, status: :unprocessable_entity
+    #     end
+    # end
     def create
         # user = User.find_by(username: "b")
         user = User.find_by(username: "b")

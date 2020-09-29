@@ -2,15 +2,15 @@ class Api::V1::UserWorkoutsController < ApplicationController
     before_action :find_user_workout, only: [:show, :update, :destroy]
 
     def index
-        user_workouts = UserWorkout.all
-        user_workouts = user_workouts.where(user_id: 2).order(:date).order(:time_updated)
+        user_workouts = UserWorkout.order(:date).order(:time_updated)
+       # user_workouts = user_workouts.where(user_id: 2).order(:date).order(:time_updated)
         render json: UserWorkoutsSerializer.new(user_workouts).to_serialized_json
     end
 
-    # def show
-    #     user_workout = UserWorkout.find_by_id(params[:id])
-    #     render json: UserWorkoutsSerializer.new(@user_workout).to_serialized_json
-    # end
+    def show
+        user_workout = UserWorkout.find_by_id(params[:id])
+        render json: UserWorkoutsSerializer.new(@user_workout).to_serialized_json
+    end
 
     def update
         byebug
@@ -24,7 +24,7 @@ class Api::V1::UserWorkoutsController < ApplicationController
      end
 
     def create
-        user = User.find_by(username: "b")
+        user = User.find(user_params["username"])
         workout = Workout.create(workout_params)
         user_workout = UserWorkout.new(date: user_workout_params["date"], workout: workout, user: user)
         if user_workout.save

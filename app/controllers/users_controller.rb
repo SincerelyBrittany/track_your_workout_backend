@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
  def create
-        user = User.new(user_params)
-        if user.save
-            render json: {id: user.id, name:user.name}, status: :accepted
-        else
-            render json: { errors: "Password incorrect" }, status: :unprocessable_entity
-        end
+        user = User.find_or_create_by(username: params[:username])
+        # byebug
+        render json: user
+        # user = User.new(user_params)
+        # if user.save
+        #     render json: {id: user.id, name:user.name}, status: :accepted
+        # else
+        #     render json: { errors: "Password incorrect" }, status: :unprocessable_entity
+        # end
     end
 
     private

@@ -2,7 +2,7 @@ class UserWorkout < ApplicationRecord
     belongs_to :user
     belongs_to :workout
 
-    validates :date, uniqueness: true, presence: true
+    validates :date, presence: true
 
     def update_date
         date.strftime("%A, %b %e, %Y")

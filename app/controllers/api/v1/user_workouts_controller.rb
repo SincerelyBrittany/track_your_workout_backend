@@ -13,14 +13,17 @@ class Api::V1::UserWorkoutsController < ApplicationController
     end
 
     def update
-        byebug
-    #     #user_workout = UserWorkout.find_by_id(params[:id])
-    #     user_workout.update(user_workout_params)
-    #     if user_workout.save
-    #         render json: UserWorkoutsSerializer.new(user_workout), status: :accepted
-    #     else
-    #       render json: { errors: user_workout.errors.full_messages }, status: :unprocessable_entity
-    #     end
+        user_workout = UserWorkout.find_by_id(params[:id])
+        if user_workout.workout.update(workout_params)
+            workout = user_workout.workout
+        end 
+        user = user_workout.user
+        user_workout.update(date: user_workout_params["date"], workout: workout, user: user)
+        if user_workout.save
+            render json: UserWorkoutsSerializer.new(user_workout).to_serialized_json
+        else
+          render json: { errors: user_workout.errors.full_messages }, status: :unprocessable_entity
+        end
      end
 
     def create
@@ -54,6 +57,9 @@ class Api::V1::UserWorkoutsController < ApplicationController
 
     def user_workout_params
         params.require(:user_workout).permit(:date)
+    end
+    def user_work_params
+        params.permit(:name, :date, :url, :time)
     end
 
     def find_user_workout

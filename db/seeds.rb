@@ -8,6 +8,7 @@
 
 User.destroy_all
 UserWorkout.destroy_all
+Workout.destroy_all
 # Category.destroy_all
 
 

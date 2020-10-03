@@ -1,11 +1,11 @@
 class Api::V1::WorkoutsController < ApplicationController
     # before_action :authenticate_user!
     def index
-        workouts = Workout.all
+        @workouts = Workout.all
         # render json: workouts
-        render json: WorkoutSerializer.new(workouts)
+        # render json: WorkoutSerializer.new(workouts)
         # render json: @workouts.to_json(include: [:category])
-        # render json: @workouts, status: 200
+        render json: @workouts, status: 200
     end
 
     # def show

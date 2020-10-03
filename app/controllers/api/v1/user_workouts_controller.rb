@@ -33,6 +33,7 @@ class Api::V1::UserWorkoutsController < ApplicationController
         if user_workout.save
             render json: UserWorkoutsSerializer.new(user_workout).to_serialized_json
         else
+            byebug
             render json: { errors: user_workout.errors.full_messages }, status: :unprocessable_entity
         end
     end
@@ -40,7 +41,7 @@ class Api::V1::UserWorkoutsController < ApplicationController
     def destroy
         user_workout = UserWorkout.find_by_id(params[:id])
         # byebug
-        # user_workout.destroy
+        user_workout.destroy
         user_workouts = UserWorkout.all
         render json: UserWorkoutsSerializer.new(user_workouts)
     end

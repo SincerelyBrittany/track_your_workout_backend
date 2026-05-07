@@ -1,4 +1,4 @@
-# trackYourWorkout
+# track_your_workout_backend
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -11,27 +11,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://www.example.com/">
-    <img src="https://github.com/SincerelyBrittany/trackYourWorkout/blob/master/track-your-workout-frontend/styles/workout_img.png" alt="Logo" >
-  </a>
+  <img src="https://github.com/SincerelyBrittany/trackYourWorkout/blob/master/track-your-workout-frontend/styles/workout_img.png" alt="Logo" >
 
-  <h3 align="center"> Track Your Workout</h3>
+  <h3 align="center"> Track Your Workout &mdash; Backend API</h3>
 
   <p align="center">
-    This is a single page application ("SPA") for keeping track of your workouts. I really enjoy working out and since COVID, it has been hard to keep track of the workouts on youtube. Although playlist are nice, I thought it would be cool to have a place to see all workouts for a particular date and/or time.
+    Rails API backend for the <a href="https://github.com/SincerelyBrittany/trackYourWorkout">Track Your Workout</a> application. Provides RESTful endpoints for managing users and workout entries, backed by PostgreSQL.
     <br />
-    <!-- <a href="https://www.example.com/"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />-->
-    <i> <a href=""> </a>Live Site - Coming Soon </i>
-    ·
     <a href="https://www.youtube.com/watch?v=yA5mG-l8TuA&ab_channel=BuildWithBrittany">View Youtube Demo</a> 
-    ·
+    &middot;
     <a href="https://dev.to/sincerelybrittany/javascript-and-rails-single-page-application-spa-3opc">Blog</a> 
-     ·
-    <a href="https://github.com/SincerelyBrittany//trackYourWorkout/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/SincerelyBrittany//trackYourWorkout/issues">Request Feature</a> 
+    &middot;
+    <a href="https://github.com/SincerelyBrittany/track_your_workout_backend/issues">Report Bug</a>
+    &middot;
+    <a href="https://github.com/SincerelyBrittany/track_your_workout_backend/issues">Request Feature</a> 
   </p>
 </p>
 
@@ -45,7 +38,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
+* [API Endpoints](#api-endpoints)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -57,88 +50,74 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://www.example.com/)
-
-This application was built with a rails backend and Javascript frontend. 
+This is the Rails API backend for Track Your Workout. It handles user creation, workout storage, and serves JSON responses to the JavaScript frontend. The API is versioned under `/api/v1/` and uses Active Model Serializers to shape the response data.
 
 ### Built With
 * [Ruby-on-Rails](https://guides.rubyonrails.org/)
-* [postgresql](https://www.postgresql.org/)
-* [byebug](https://rubygems.org/gems/byebug/versions/9.0.6)
-* [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Active Model Serializers](https://github.com/rails-api/active_model_serializers)
 *  Love ❤️
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get the application started you must have ruby and postgresql installed on your computer. Checkout the ruby on rails [getting-started-guide](https://guides.rubyonrails.org/v5.0/getting_started.html) to learn how to install it on your device. If you need to install postgres check out the doumentation [here](https://www.postgresql.org/about/).
+To get the backend running locally you will need Ruby, Rails, and PostgreSQL installed. Check out the [Rails getting started guide](https://guides.rubyonrails.org/v5.0/getting_started.html) and [PostgreSQL docs](https://www.postgresql.org/about/) if you need to install either.
 
 ### Prerequisites
-Other than the gems listed in this app's Gemfile, you will need to have [Ruby](https://www.ruby-lang.org/en/downloads/) and [Rails](https://guides.rubyonrails.org/v5.0/getting_started.html) installed on your local machine as well as the ability to install Ruby gems.
 
-Before running your server, you will need to install the gems and add content to your database manually or you can use the seeds file:
-
-To install the gems first cd into <a href="https://github.com/SincerelyBrittany/track_your_workout_backend"> track_your_workout_backend </a> and run the following:
-
-```sh
-bundle install
-```
-
-To run your migrations and update your db/schema.rb file to match the structure of the database, run the following:
-
-```sh
-rails db:create
-```
-
-```sh
-rails db:migrate
-```
-
-To create data in the database, run the following:
-```sh
-rails db:seed
-```
-
-```sh
-rails s
-```
-and then go to your favorite browser and visit this webpage "http://localhost:3000/api/v1/workouts" 
+* Ruby 2.7+
+* Rails 6+
+* PostgreSQL
 
 ### Installation
 
 1. Clone the repo
 ```sh
-git clone git@github.com:SincerelyBrittany/trackYourWorkout.git
+git clone git@github.com:SincerelyBrittany/track_your_workout_backend.git
 ```
-3. Cd into backend and install the gemfile packages
+
+2. Install gems
 ```sh
 bundle install
 ```
-4. Run rails s
-5. cd into frontend and open index.html
+
+3. Set up the database
+```sh
+rails db:create db:migrate db:seed
+```
+
+4. Start the server
+```sh
+rails s
+```
+
+The API will be available at `http://localhost:3000`.
 
 
-<!-- USAGE EXAMPLES -->
-<!-- ## Usage
+<!-- API ENDPOINTS -->
+## API Endpoints
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/users` | Create or find a user by username |
+| `GET` | `/api/v1/user_workouts?user_id=:id` | Get all workouts for a user |
+| `POST` | `/api/v1/user_workouts` | Save a new workout |
+| `PUT` | `/api/v1/user_workouts/:id` | Update a workout |
+| `DELETE` | `/api/v1/user_workouts/:id` | Delete a workout |
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
- -->
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/SincerelyBrittany//trackYourWorkout/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/SincerelyBrittany/track_your_workout_backend/issues) for a list of proposed features (and known issues).
 
 
 
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -167,21 +146,19 @@ Connect/Follow me:
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/SincerelyBrittany/trackYourWorkout.svg?style=flat-square
-[contributors-url]: https://github.com/SincerelyBrittany/trackYourWorkout/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SincerelyBrittany/trackYourWorkout.svg?style=flat-square
-[forks-url]: https://github.com/SincerelyBrittany//trackYourWorkout/network/members
-[stars-shield]: https://img.shields.io/github/stars/SincerelyBrittany/trackYourWorkout.svg?style=flat-square
-[stars-url]: https://github.com/SincerelyBrittany/trackYourWorkout/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SincerelyBrittany/trackYourWorkout.svg?style=flat-square
-[issues-url]: https://github.com/SincerelyBrittany/trackYourWorkout/issues
-[license-shield]: https://img.shields.io/github/license/SincerelyBrittany/trackYourWorkout.svg?style=flat-square
-[license-url]: https://github.com/SincerelyBrittany/trackYourWorkout/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/SincerelyBrittany/track_your_workout_backend.svg?style=flat-square
+[contributors-url]: https://github.com/SincerelyBrittany/track_your_workout_backend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/SincerelyBrittany/track_your_workout_backend.svg?style=flat-square
+[forks-url]: https://github.com/SincerelyBrittany/track_your_workout_backend/network/members
+[stars-shield]: https://img.shields.io/github/stars/SincerelyBrittany/track_your_workout_backend.svg?style=flat-square
+[stars-url]: https://github.com/SincerelyBrittany/track_your_workout_backend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/SincerelyBrittany/track_your_workout_backend.svg?style=flat-square
+[issues-url]: https://github.com/SincerelyBrittany/track_your_workout_backend/issues
+[license-shield]: https://img.shields.io/github/license/SincerelyBrittany/track_your_workout_backend.svg?style=flat-square
+[license-url]: https://github.com/SincerelyBrittany/track_your_workout_backend/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/sincerelybrittany/
 [twitter-shield]:https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2FSincerelyBrittt
 [twitter-url]: https://twitter.com/SincerelyBrittt
 [dev-to-url]: https://dev.to/sincerelybrittany
 [dev-to-shield]:https://img.shields.io/badge/-Dev.to-black.svg?style=flat-square&logo=dev.to&colorB=555
-[product-screenshot]: https://github.com/SincerelyBrittany/trackYourWorkout/blob/fix-search/track-your-workout-frontend/styles/workout_gif.gif
